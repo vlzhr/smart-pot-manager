@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 from codecs import open
 import os
 from json import loads, dumps
@@ -42,6 +42,12 @@ def index():
     return render_template("change-button.html", status = status)
     return "<a href='/change_status?status=water'>need watering</a><br><a href='/change_status?status=clear'>doesnt need water</a>"
     return redirect("http://super-pot.ru")
+
+@app.route("/stats")
+def stats():
+    with open(link("data.json"), "r", encoding="utf-8") as f:
+        data = loads(f.read())
+    return render_template("stats.html", data=data)
 
 @app.route("/r", methods=["POST"])
 def r():

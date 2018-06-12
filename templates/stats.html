@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pot statistics</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        .holder{
+            height:8px;
+            background:#eaeaea;
+            position:relative;
+            width: 100%;
+            margin: 0px auto 10px;
+        }
+        .bar {
+            background: #2980b9;
+            height: 8px;
+            width: 0%;
+            transition: width 2s, background .2s;
+        }
+
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0px;
+        }
+        section {
+            width: 100%;
+        }
+        article {
+            box-sizing: border-box;
+            width: 90%;
+            max-width: 597px;
+            background: #FFFFFF;
+            border: 1px solid #FFFFFF;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            padding: 35px 56px 70px;
+            margin: 10px auto;
+        }
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .back {
+            cursor: pointer;
+        }
+        .title {
+            font-weight: bold;
+            font-size: 17px;
+            color: #000000;
+        }
+
+        .bars {
+            box-sizing: border-box;
+            padding: 25px;
+            margin: 10px auto;
+        }
+        .char-desc {
+            font-weight: 300;
+            line-height: 17px;
+            font-size: 16px;
+            letter-spacing: -0.0241176em;
+            color: #506B53;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .char-val {
+            line-height: 19px;
+            font-size: 17px;
+            color: #3B403C;
+        }
+        .char {
+            margin-bottom: 16px;
+        }
+
+
+    </style>
+    <script>
+        setTimeout(function(){
+
+            $('.bar').each(function(i){
+
+                var $bar = $(this);
+                setTimeout(function(){
+                    $bar.css('width', $bar.attr('data-percent'));
+                }, i*100);
+            });
+
+        }, 1000)
+    </script>
+</head>
+<body>
+    <section>
+
+        <article>
+            <header>
+                <div class="title">STATISTICS</div>
+                <div class="back">
+                    <img src="{{url_for('static', filename='arrow.png')}}" alt="back" onclick="location='/'">
+                </div>
+            </header>
+                <div class="bars">
+                    <div class="char">
+                        <div class="char-desc">
+                            <div class="char-name">Water level</div>
+                            <div class="char-val">{{data["level"]}}%</div>
+                        </div>
+                        <div class="holder">
+                            <div class="bar" data-percent='{{data["level"]}}%' style="background: #2D9CDB"></div>
+                        </div>
+                    </div>
+
+                    <div class="char">
+                        <div class="char-desc">
+                            <div class="char-name">Humidity</div>
+                            <div class="char-val">{{data["humidity"]}}%</div>
+                        </div>
+                        <div class="holder">
+                            <div class="bar" data-percent='{{data["humidity"]}}%' style="background: #56CCF2"></div>
+                        </div>
+                    </div>
+
+                    <div class="char">
+                        <div class="char-desc">
+                            <div class="char-name">Moisture</div>
+                            <div class="char-val">{{data["moisture"]}}%</div>
+                        </div>
+                        <div class="holder">
+                            <div class="bar" data-percent='{{data["moisture"]}}%' style="background: rgba(86, 204, 242, 0.5)"></div>
+                        </div>
+                    </div>
+
+                    <div class="char">
+                        <div class="char-desc">
+                            <div class="char-name">Temperature</div>
+                            <div class="char-val">{{data["temperature"]}}&#8451;</div>
+                        </div>
+                        <div class="holder">
+                            <div class="bar" data-percent='{{data["temperature"] * 2}}%' style="background: #F2994A"></div>
+                        </div>
+                    </div>
+
+                    <div class="char">
+                        <div class="char-desc">
+                            <div class="char-name">Light level</div>
+                            <div class="char-val">{{data["light"]}}%</div>
+                        </div>
+                        <div class="holder">
+                            <div class="bar" data-percent='{{data["light"]}}%' style="background: #F2C94C"></div>
+                        </div>
+                    </div>
+
+                </div>
+        </article>
+
+    </section>
+</body>
+</html>

@@ -137,11 +137,11 @@
 		{% else %}
 
 			<p>The flower is being watered...</p>
-			<a href="/change_status?status=not_need">Doesn't need watering</a>
+			<a onclick="location='/change_status?status=not_need'">Doesn't need watering</a>
 		{% endif %}
 
 		</article>
-		<div class="watch-stat">Observe statistics</div>
+		<div class="watch-stat" onclick="location='/stats'">Observe statistics</div>
 
 	</section>
 </body>
